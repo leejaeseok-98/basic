@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios-json-view</title>
+</head>
+<body>
+<form>
+  <input type="text" name ="name" id = "name">
+  <input type="text" name ="email" id = "email">
+  <button type="button" onclick="postData()">제출</button>
+</form>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  async function postData() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const data = {name, email};
+      const result = await axios.post("http://localhost:8080/hello/axios-json-view", data);
+      console.log(result.data)
+  }
+</script>
+</body>
+</html>

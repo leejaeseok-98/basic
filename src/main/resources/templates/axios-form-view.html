@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios-form-view</title>
+</head>
+<body>
+    <form>
+        이름 : <input type="text" name="name" id="name">
+        이메일 : <input type="text" name="email" id="email">
+        <button type="button" onclick="postData()">제출</button>
+    </form>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        async function postData() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const serverData = new FormData();
+            serverData.append('name',name);
+            serverData.append('email',email);
+            <!-- ok가 result에 있어 화면에 안보이고 콘솔에 찍힘   -->
+            const result = await axios.post("http://localhost:8080/hello/axios-form-view", serverData);
+            console.log(result.data);
+        }
+    </script>
+</body>
+</html>

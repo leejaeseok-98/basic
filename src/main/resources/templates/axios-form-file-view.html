@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios-form-file-view</title>
+</head>
+<body>
+      <form>
+        <input type="text" name ="name" id = "name">
+        <input type="text" name ="email" id = "email">
+        <input type="file" name ="photo" id = "photo" accept="image/*">
+        <button type="button" onclick="postData()">제출</button>
+      </form>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script>
+        async function postData() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const fileInput = document.getElementById("photo");
+            const file = fileInput.files[0];
+            const serverData = new FormData();
+            serverData.append('name',name);
+            serverData.append('email',email);
+            serverData.append('photo',file);
+            const result = await axios.post("http://localhost:8080/hello/axios-form-file-view", serverData);
+            console.log(result.data);
+        }
+      </script>
+</body>
+</html>
