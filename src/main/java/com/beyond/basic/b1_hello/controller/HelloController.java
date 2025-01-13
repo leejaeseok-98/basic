@@ -3,7 +3,6 @@ package com.beyond.basic.b1_hello.controller;
 import com.beyond.basic.b1_hello.domain.Hello;
 import com.beyond.basic.b1_hello.domain.StudentReqDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

@@ -1,0 +1,8 @@
+spring.application.name=basic
+#아래 방식은 .properties확장자에 의한 방식
+#.을 통해 계층 구조를 표현 => 문제점 : 중복이 발생할 가능성이 많음
+
+#아래 방식은 .yml 또는 .yaml 확장자에 의한 방식
+#들여쓰기 방식을 통해서 계층 구조를표현
+#server:
+#  port :8081
