@@ -1,4 +1,4 @@
-spring.application.name=basic
+#spring.application.name=basic
 #아래 방식은 .properties확장자에 의한 방식
 #.을 통해 계층 구조를 표현 => 문제점 : 중복이 발생할 가능성이 많음
 
@@ -6,3 +6,12 @@ spring.application.name=basic
 #들여쓰기 방식을 통해서 계층 구조를표현
 #server:
 #  port :8081
+
+spring:
+#  아래의 jdbc기본 db관련 설정은 jdbc뿐만 아니라 mybaties,jpa 등 모든 기술에 근간이 됨.
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/basic
+    username: root
+    password: 1234
+

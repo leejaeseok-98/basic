@@ -14,15 +14,15 @@
 <table>
         <tr>
             <td>name</td>
-            <td>홍길동</td>
+            <td th:text = "${member.name}"></td>
         </tr>
         <tr>
             <td>email</td>
-            <td>hongildong@naver.com</td>
+            <td th:text = "${member.email}"></td>
         </tr>
         <tr>
             <td>password</td>
-            <td>1234</td>
+            <td th:text = "${member.password}"></td>
         </tr>
 </table>
 </body>
