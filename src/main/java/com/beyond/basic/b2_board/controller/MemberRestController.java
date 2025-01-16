@@ -1,12 +1,13 @@
 package com.beyond.basic.b2_board.controller;
 
-import com.beyond.basic.b2_board.dtos.MemberCreateDto;
-import com.beyond.basic.b2_board.dtos.MemberDetailDto;
-import com.beyond.basic.b2_board.dtos.MemberListRes;
-import com.beyond.basic.b2_board.dtos.MemberUpdateDto;
+import com.beyond.basic.b2_board.domain.Member;
+import com.beyond.basic.b2_board.dtos.*;
 import com.beyond.basic.b2_board.service.MemberService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 //모든 메서드에 ResponseBody붙음
 @RestController
@@ -20,22 +21,31 @@ public class MemberRestController {
 
     //    회원목록조회
     @GetMapping("/list")
-    public List<MemberListRes> memberList() {
+    public ResponseEntity<?> memberList() {
         List<MemberListRes> memberListRes = memberService.findAll();
-        return memberListRes;
+        return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "memberlist is found",memberListRes),HttpStatus.OK);
     }
 
     //    회원상세조회
     @GetMapping("/detail/{id}")
-    public MemberDetailDto memberDetail(@PathVariable Long id) {
-        MemberDetailDto dto = memberService.findById(id);
-        return dto;
+    public ResponseEntity<?> memberDetail(@PathVariable Long id) {
+        try {
+            MemberDetailDto dto = memberService.findById(id);
+            return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "memberDetailLest is found",dto),HttpStatus.OK);
+        }catch (EntityNotFoundException e){
+            return new ResponseEntity<>(new CommonErrorDto(HttpStatus.NOT_FOUND.value(), "memberDetailList is not found"),HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/create")
-    public String memberCreatePost(@RequestBody MemberCreateDto dto) {
-        memberService.save(dto);
-        return "ok";
+    public ResponseEntity<?> memberCreatePost(@RequestBody MemberCreateDto dto) {
+        try{
+            Member member = memberService.save2(dto);
+            return new ResponseEntity<>(new CommonDto(HttpStatus.CREATED.value(), "member is created",member.getId()),HttpStatus.CREATED);
+        }catch (IllegalArgumentException e){
+            return new ResponseEntity<>(new CommonErrorDto(HttpStatus.BAD_REQUEST.value(), e.getMessage()),HttpStatus.BAD_REQUEST);
+        }
+
     }
 
 //    get:조회, post:등록, patch:부분수정, put:대체, delete:삭제
@@ -44,5 +54,11 @@ public class MemberRestController {
     public String updatePw(@RequestBody MemberUpdateDto dto){
         memberService.updatePw(dto);
         return null;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteMember(@PathVariable Long id){
+        memberService.delete(id);
+        return "ok";
     }
 }

@@ -38,16 +38,27 @@ public class MemberService {
         if (dto.getPassword().length()<8){
             throw new IllegalArgumentException("비밀번호가 너무 짧습니다.");
         }
-
-        memberRepository.save(dto.toEntitiy());
     }
+
+    public Member save2(MemberCreateDto dto) throws IllegalArgumentException{
+        if (memberRepository.findByEmail(dto.getEmail()).isPresent()){
+            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
+        }
+        if (dto.getPassword().length()<8){
+            throw new IllegalArgumentException("비밀번호가 너무 짧습니다.");
+        }
+
+        Member member = memberRepository.save(dto.toEntitiy());
+        return member;
+    }
+
     public MemberDetailDto findById(Long id) throws NoSuchElementException, RuntimeException{
 //        Optional<Member> member = memberMemoryRepository.findById(id);
 //        Member member1 = member.orElseThrow(()-> new NoSuchElementException("없는 id입니다."));
 //        MemberDetailDto dto = member1.detailFromEntity();
 //        return dto;
         return memberRepository.findById(id)
-                .orElseThrow(()->new NoSuchElementException("없는 id입니다."))
+                .orElseThrow(()->new EntityNotFoundException("없는 id입니다."))
                 .detailFromEntity();
     }
 
@@ -59,6 +70,10 @@ public class MemberService {
             memberRepository.save(member);
         }
 
-
+    }
+    public void delete(Long id){
+//        memberRepository.deleteById(id); 객체지향에 맞지 않고 예외처리가 안됨
+        Member member = memberRepository.findById(id).orElseThrow(()->new EntityNotFoundException("없다"));
+        memberRepository.delete(member);
     }
 }
