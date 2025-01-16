@@ -35,6 +35,7 @@ public class MemberController {
 //
 //    의존성주입방법. RequiredArgs 어노테이션 사용방법
 //        RequiredArgs :반드시 초기화 되어야 하는 필드(final, @NonNull어노테이션)를 대상으로 생성자를 자동으로 만들어주는 어노테이션
+//        Nonnull이나 final이 꼭 있어야 됌
 private final MemberService memberService;
 
     @GetMapping("")

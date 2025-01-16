@@ -1,0 +1,21 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--&lt;!&ndash;MemberMyBatisRepository와 관계성을 맺어줌&ndash;&gt;-->
+<!--<mapper namespace="com.beyond.basic.b2_board.repository.MemberMyBatisRepository">-->
+<!--    <insert id="save" parameterType="com.beyond.basic.b2_board.domain.Member">-->
+<!--&lt;!&ndash; 어떤 객체인지 알려줘야한다.save에서 Member을 매개변수로 받았는데 이것을 알려줘야함&ndash;&gt;-->
+<!--        insert into member(name, email, password) values(#{name},#{email},#{password});-->
+<!--    </insert>-->
+<!--&lt;!&ndash; 리턴값을 알려줌&ndash;&gt;-->
+<!--    <select id="findAll" resultType="com.beyond.basic.b2_board.domain.Member">-->
+<!--        select * from member-->
+<!--    </select>-->
+<!--&lt;!&ndash;parameterType="Long" 빼도 됌&ndash;&gt;-->
+<!--    <select id="findById" resultType="com.beyond.basic.b2_board.domain.Member" parameterType="Long">-->
+<!--        select * from member where id = #{id};-->
+<!--    </select>-->
+<!--    <select id="findByEmail" resultType="com.beyond.basic.b2_board.domain.Member">-->
+<!--        select * from member where email = #{email};-->
+<!--    </select>-->
+<!--</mapper>-->
