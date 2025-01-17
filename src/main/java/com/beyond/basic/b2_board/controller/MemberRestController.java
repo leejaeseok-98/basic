@@ -29,22 +29,27 @@ public class MemberRestController {
     //    회원상세조회
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> memberDetail(@PathVariable Long id) {
-        try {
-            MemberDetailDto dto = memberService.findById(id);
-            return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "memberDetailLest is found",dto),HttpStatus.OK);
-        }catch (EntityNotFoundException e){
-            return new ResponseEntity<>(new CommonErrorDto(HttpStatus.NOT_FOUND.value(), "memberDetailList is not found"),HttpStatus.NOT_FOUND);
-        }
+        MemberDetailDto dto = memberService.findById(id);
+        return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "memberDetailLest is found",dto),HttpStatus.OK);
+//        try {
+//            MemberDetailDto dto = memberService.findById(id);
+//            return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "memberDetailLest is found",dto),HttpStatus.OK);
+//        }catch (EntityNotFoundException e){
+//            return new ResponseEntity<>(new CommonErrorDto(HttpStatus.NOT_FOUND.value(), "memberDetailList is not found"),HttpStatus.NOT_FOUND);
+//        }
     }
 
     @PostMapping("/create")
     public ResponseEntity<?> memberCreatePost(@RequestBody MemberCreateDto dto) {
-        try{
-            Member member = memberService.save2(dto);
-            return new ResponseEntity<>(new CommonDto(HttpStatus.CREATED.value(), "member is created",member.getId()),HttpStatus.CREATED);
-        }catch (IllegalArgumentException e){
-            return new ResponseEntity<>(new CommonErrorDto(HttpStatus.BAD_REQUEST.value(), e.getMessage()),HttpStatus.BAD_REQUEST);
-        }
+        Member member = memberService.save2(dto);
+        return new ResponseEntity<>(new CommonDto(HttpStatus.CREATED.value(), "member is created",member.getId()),HttpStatus.CREATED);
+
+//        try{
+//            Member member = memberService.save2(dto);
+//            return new ResponseEntity<>(new CommonDto(HttpStatus.CREATED.value(), "member is created",member.getId()),HttpStatus.CREATED);
+//        }catch (IllegalArgumentException e){
+//            return new ResponseEntity<>(new CommonErrorDto(HttpStatus.BAD_REQUEST.value(), e.getMessage()),HttpStatus.BAD_REQUEST);
+//        }
 
     }
 

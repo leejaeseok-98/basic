@@ -4,9 +4,9 @@ import com.beyond.basic.b2_board.domain.Member;
 import com.beyond.basic.b2_board.dtos.CommonDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+//controller + responsebody(모든메서드에)
 @RestController
 @RequestMapping("/response/entity")
 public class ResponseEntityController {
